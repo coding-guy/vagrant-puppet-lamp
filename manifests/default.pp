@@ -1,3 +1,5 @@
+$mysql_root_password = '123'
+
 exec { 'apt-get update' :
     command => 'apt-get update',
     path    => '/usr/bin/',
@@ -7,7 +9,8 @@ class { 'apt' :
     always_apt_update => true
 }
 
-package { ['make', 'vim', 'python-software-properties', 'curl', 'libcurl4-gnutls-dev' ] :
+package { ['make', 'vim', 'python-software-properties', 'curl', 'libcurl4-gnutls-dev',
+           'git', 'subversion', 'git-svn'] :
     ensure  => installed,
     require => Exec['apt-get update'],
 }
@@ -15,10 +18,10 @@ package { ['make', 'vim', 'python-software-properties', 'curl', 'libcurl4-gnutls
 apt::ppa { 'ppa:ondrej/php5' : }
 
 class { 'apache' :
-    require => apt::ppa['ppa:ondrej/php5']
+    require => Apt::Ppa['ppa:ondrej/php5'],
 }
 
-apache::module { 'rewrite': }
+apache::module { 'rewrite' : }
 
 apache::vhost { 'invoise':
     server_name   => 'invoise.dev',
@@ -44,7 +47,7 @@ apache::vhost { 'puphpet':
     priority      => '1',
 }
 
-class { 'php':
+class { 'php' :
     service => 'apache',
     require => Package['apache'],
 }
@@ -55,11 +58,11 @@ php::module { 'intl' : }
 php::module { 'mcrypt' : }
 php::module { 'mysql' : }
 
-class { 'php::pear':
+class { 'php::pear' :
     require => Class['php'],
 }
 
-class { 'php::devel':
+class { 'php::devel' :
     require => Class['php'],
 }
 
@@ -67,12 +70,12 @@ php::pecl::module { 'pecl_http' :
     use_package => false,
 }
 
-class { 'xdebug':
+class { 'xdebug' :
     require => Package['php'],
     notify  => Service['apache'],
 }
 
-xdebug::config { 'default':
+xdebug::config { 'default' :
     default_enable        => '1',
     remote_autostart      => '1',
     remote_connect_back   => '1',
@@ -83,4 +86,8 @@ xdebug::config { 'default':
     var_display_max_data  => '10000',
     var_display_max_depth => '20',
     show_exception_trace  => '0'
+}
+
+class { 'mysql' :
+    root_password => $mysql_root_password,
 }
