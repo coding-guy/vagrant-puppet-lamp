@@ -12,7 +12,7 @@ class mysql::password {
   file { '/root/.my.cnf':
     ensure  => 'present',
     path    => '/root/.my.cnf',
-    mode    => '0400',
+    mode    => '0644',
     owner   => 'root',
     group   => 'root',
     content => template('mysql/root.my.cnf.erb'),
@@ -23,7 +23,7 @@ class mysql::password {
   file { '/root/.my.cnf.backup':
     ensure  => 'present',
     path    => '/root/.my.cnf.backup',
-    mode    => '0400',
+    mode    => '0644',
     owner   => 'root',
     group   => 'root',
     content => template('mysql/root.my.cnf.backup.erb'),
