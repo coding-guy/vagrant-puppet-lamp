@@ -34,9 +34,9 @@ The latest PHP 5.4.x is installed. If you want PHP 5.3, remove the following:
 
     apt::ppa { 'ppa:ondrej/php5' : }
 
-    class { 'apache' :
+and
+
         require => Apt::Ppa['ppa:ondrej/php5'],
-    }
 
 Several PHP modules are installed. Add/remove as you wish. I have also included Xdebug. You should really be using
 Xdebug. Do you want to know more?
