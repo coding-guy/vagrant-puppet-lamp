@@ -37,11 +37,14 @@ define mysql::grant (
   exec { "mysqlgrant-${mysql_user}-${mysql_host}-${mysql_db}":
     command     => $mysql::real_root_password ? {
       ''      => "mysql -uroot < ${mysql_grant_filepath}/${mysql_grant_file}",
-      default => "mysql --defaults-file=/root/.my.cnf -uroot < ${mysql_grant_filepath}/${mysql_grant_file}",
+      default => "cp ${mysql_grant_filepath}/${mysql_grant_file} ~/${mysql_grant_file} &&
+                  chmod 644 ~/${mysql_grant_file} &&
+                  chown vagrant ~/${mysql_grant_file} &&
+                  mysql --defaults-file=/root/.my.cnf -uroot -p${mysql::real_root_password} < ~/${mysql_grant_file}",
     },
     require     => Service['mysql'],
     subscribe   => File[$mysql_grant_file],
-    path        => [ '/usr/bin' , '/usr/sbin' ],
+    path        => [ '/bin/', '/usr/bin' , '/usr/sbin' ],
     refreshonly => true;
   }
 
