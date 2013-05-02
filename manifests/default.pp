@@ -10,7 +10,7 @@ class { 'apt' :
 }
 
 package { ['gcc', 'make', 'python-software-properties',
-           'vim', 'curl', 'git', 'subversion', 'git-svn'] :
+           'vim', 'curl', 'git', 'subversion'] :
     ensure  => installed,
     require => Exec['apt-get update'],
 }
@@ -23,6 +23,11 @@ file { "/home/vagrant/.bash_aliases":
 apt::ppa { 'ppa:ondrej/php5' : }
 
 apt::builddep { 'php5' : }
+
+class { 'git' :
+    svn => true,
+    gui => false,
+}
 
 class { 'apache' :
     require => Apt::Ppa['ppa:ondrej/php5'],
@@ -93,6 +98,11 @@ xdebug::config { 'default' :
     var_display_max_data  => '10000',
     var_display_max_depth => '20',
     show_exception_trace  => '0'
+}
+
+php::custom::xhprof { 'xhprof' :
+    output_dir => '/var/www/xhprof',
+    require    => Class['php'],
 }
 
 class { 'mysql' :
