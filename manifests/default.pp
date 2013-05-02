@@ -100,11 +100,6 @@ xdebug::config { 'default' :
     show_exception_trace  => '0'
 }
 
-php::custom::xhprof { 'xhprof' :
-    output_dir => '/var/www/xhprof',
-    require    => Class['php'],
-}
-
 class { 'mysql' :
     root_password => $mysql_root_password,
 }
