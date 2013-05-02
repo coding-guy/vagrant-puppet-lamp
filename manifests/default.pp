@@ -9,13 +9,20 @@ class { 'apt' :
     always_apt_update => true
 }
 
-package { ['make', 'vim', 'python-software-properties', 'curl', 'libcurl4-gnutls-dev',
-           'git', 'subversion', 'git-svn'] :
+package { ['gcc', 'make', 'python-software-properties',
+           'vim', 'curl', 'git', 'subversion', 'git-svn'] :
     ensure  => installed,
     require => Exec['apt-get update'],
 }
 
+file { "/home/vagrant/.bash_aliases":
+    source => "${settings::confdir}/files/dot/.bash_aliases",
+    ensure  => present,
+}
+
 apt::ppa { 'ppa:ondrej/php5' : }
+
+apt::builddep { 'php5' : }
 
 class { 'apache' :
     require => Apt::Ppa['ppa:ondrej/php5'],
