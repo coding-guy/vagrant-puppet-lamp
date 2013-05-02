@@ -35,6 +35,7 @@ define apt::ppa(
       Package["${package}"],
     ],
     notify    => Exec['apt_update'],
+    onlyif    => "/usr/bin/test ! -e ${sources_list_d}/${sources_list_d_filename}",
   }
 
   file { "${sources_list_d}/${sources_list_d_filename}":
