@@ -82,22 +82,56 @@ php::pecl::module { 'pecl_http' :
     use_package => false,
 }
 
+php::ini { 'default' :
+    value    => [
+        'date.timezone = America/Chicago',
+        'display_errors = On',
+        'error_reporting = -1'
+    ],
+    template => 'extra-ini.erb',
+    target   => 'error_reporting.ini',
+    require  => Class['php'],
+}
+
 class { 'xdebug' :
     require => Package['php'],
     notify  => Service['apache'],
 }
 
-xdebug::config { 'default' :
-    default_enable        => '1',
-    remote_autostart      => '1',
-    remote_connect_back   => '1',
-    remote_enable         => '1',
-    remote_handler        => 'dbgp',
-    remote_port           => '9000',
-    show_local_vars       => '0',
-    var_display_max_data  => '10000',
-    var_display_max_depth => '20',
-    show_exception_trace  => '0'
+file_line { 'xdebug-cgi':
+    line   => '
+[xdebug]
+xdebug.default_enable=1
+xdebug.remote_autostart=1
+xdebug.remote_connect_back=1
+xdebug.remote_enable=1
+xdebug.remote_handler=dbgp
+xdebug.remote_port=9000
+xdebug.show_local_vars=0
+xdebug.show_exception_trace=0
+xdebug.var_display_max_data=10000
+xdebug.var_display_max_depth=20',
+    path    => '/etc/php5/apache2/php.ini',
+    require => Class['php'],
+    notify  => Service['apache'],
+}
+
+file_line { 'xdebug-cli':
+    line   => '
+[xdebug]
+xdebug.default_enable=1
+xdebug.remote_autostart=1
+xdebug.remote_connect_back=0
+xdebug.remote_enable=1
+xdebug.remote_handler=dbgp
+xdebug.remote_mode=req
+xdebug.remote_port=9000
+xdebug.show_local_vars=0
+xdebug.show_exception_trace=0
+xdebug.var_display_max_data=10000
+xdebug.var_display_max_depth=20',
+    path    => '/etc/php5/cli/php.ini',
+    require => Class['php']
 }
 
 class { 'mysql' :
