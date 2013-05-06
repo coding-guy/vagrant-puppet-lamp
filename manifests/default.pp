@@ -2,7 +2,7 @@ $mysql_root_password = '123'
 
 exec { 'apt-get update' :
     command => 'apt-get update',
-    path    => '/usr/bin/',
+    path    => '/usr/bin/'
 }
 
 class { 'apt' :
@@ -15,9 +15,9 @@ package { ['gcc', 'make', 'python-software-properties',
     require => Exec['apt-get update'],
 }
 
-file { "/home/vagrant/.bash_aliases":
+file { '/home/vagrant/.bash_aliases' :
     source => 'puppet:///modules/puphpet/dot/.bash_aliases',
-    ensure  => present,
+    ensure  => present
 }
 
 apt::ppa { 'ppa:ondrej/php5' : }
@@ -35,28 +35,28 @@ class { 'apache' :
 
 apache::module { 'rewrite' : }
 
-apache::vhost { 'invoise':
+apache::vhost { 'invoise' :
     server_name   => 'invoise.dev',
     serveraliases => ['www.invoise.dev'],
     docroot       => '/var/www/invoi.se/web',
     port          => '80',
-    priority      => '1',
+    priority      => '1'
 }
 
-apache::vhost { 'jtreminio':
+apache::vhost { 'jtreminio' :
     server_name   => 'jtreminio.dev',
     serveraliases => ['www.jtreminio.dev'],
     docroot       => '/var/www/jtreminio.com/website',
     port          => '80',
-    priority      => '1',
+    priority      => '1'
 }
 
-apache::vhost { 'puphpet':
+apache::vhost { 'puphpet' :
     server_name   => 'puphpet.dev',
     serveraliases => ['www.puphpet.dev'],
     docroot       => '/var/www/puphpet/web',
     port          => '80',
-    priority      => '1',
+    priority      => '1'
 }
 
 class { 'php' :
@@ -79,7 +79,7 @@ class { 'php::devel' :
 }
 
 php::pecl::module { 'pecl_http' :
-    use_package => false,
+    use_package => false
 }
 
 php::ini { 'default' :
@@ -90,7 +90,7 @@ php::ini { 'default' :
     ],
     template => 'extra-ini.erb',
     target   => 'error_reporting.ini',
-    require  => Class['php'],
+    require  => Class['php']
 }
 
 class { 'xdebug' :

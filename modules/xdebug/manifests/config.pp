@@ -54,8 +54,8 @@ define xdebug::config (
         $ini_file = '/etc/php5/apache2/php.ini'
         $vars     = $cgi
     } elsif $name == 'cli' {
-        $ini_file  = '/etc/php5/cli/php.ini'
-        $vars      = $cli
+        $ini_file = '/etc/php5/cli/php.ini'
+        $vars     = $cli
     } else {
         $ini_file = $ini
         $vars     = $default
@@ -70,9 +70,9 @@ define xdebug::config (
 
     if ! defined(File['/usr/bin/xdebug']) {
         file { '/usr/bin/xdebug' :
-            ensure  => 'present',
-            mode    => '+X',
-            source  => 'puppet:///modules/xdebug/cli_alias.erb'
+            ensure => 'present',
+            mode   => '+X',
+            source => 'puppet:///modules/xdebug/cli_alias.erb'
         }
     }
 }
