@@ -11,7 +11,6 @@ Vagrant.configure("2") do |config|
     end
 
     config.vm.synced_folder "../../www", "/var/www", id: "vagrant-root", :nfs => true
-    config.vm.synced_folder "files", "/etc/puppet/files", id: "puppet-files"
 
     config.vm.provision :puppet do |puppet|
         puppet.manifests_path = "manifests"
