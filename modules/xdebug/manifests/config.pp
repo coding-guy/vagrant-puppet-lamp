@@ -1,83 +1,78 @@
 define xdebug::config (
-    #Template variables
-    $ini_file_path    = '',
-    $default_enable   = '',
-    $remote_autostart = '',
-    $remote_connect_back = '',
-    $remote_enable    = '',
-    $remote_handler   = '',
-    $remote_host      = '',
-    $remote_port      = '',
-    $show_exception_trace = '',
-    $show_local_vars  = '',
-    $var_display_max_data = '',
-    $var_display_max_depth = '',
-  )
-{
-    #Template variables default values
-    $xdebug_ini_file_path = $ini_file_path ? {
-        ''      => '/etc/php5/conf.d/xdebug_config.ini',
-        default => $ini_file_path,
+        $ini                   = '/etc/php5/apache2/php.ini',
+        $default_enable        = 1,
+        $remote_autostart      = 1,
+        $remote_connect_back   = 1,
+        $remote_enable         = 1,
+        $remote_handler        = 'dbgp',
+        $remote_host           = $ipaddress,
+        $remote_mode           = 'req',
+        $remote_port           = 9000,
+        $show_exception_trace  = 0,
+        $show_local_vars       = 0,
+        $var_display_max_data  = 10000,
+        $var_display_max_depth = 20
+) {
+
+    $default = {
+        default_enable        => $default_enable,
+        remote_autostart      => $remote_autostart,
+        remote_connect_back   => $remote_connect_back,
+        remote_enable         => $remote_enable,
+        remote_handler        => $remote_handler,
+        remote_host           => $remote_host,
+        remote_mode           => $remote_mode,
+        remote_port           => $remote_port,
+        show_exception_trace  => $show_exception_trace,
+        show_local_vars       => $show_local_vars,
+        var_display_max_data  => $var_display_max_data,
+        var_display_max_depth => $var_display_max_depth
     }
 
-    $xdebug_default_enable = $default_enable ? {
-        ''      => '1',
-        default => $default_enable,
+    $cgi = {
+        default_enable        => 1,
+        remote_autostart      => 1,
+        remote_connect_back   => 1,
+        remote_enable         => 1,
+        remote_handler        => 'dbgp',
+        remote_host           => $ipaddress,
+        remote_mode           => 'req',
+        remote_port           => 9000,
+        show_exception_trace  => 0,
+        show_local_vars       => 0,
+        var_display_max_data  => 10000,
+        var_display_max_depth => 20
     }
 
-    $xdebug_remote_connect_back = $remote_connect_back ? {
-        ''      => '0',
-        default => $remote_connect_back,
+    $cli_temp = {
+        ini                 => '/etc/php5/cli/php.ini',
+        remote_connect_back => 0
+    }
+    $cli = merge($cgi, $cli_temp)
+
+    if $name == 'cgi' {
+        $ini_file = '/etc/php5/apache2/php.ini'
+        $vars     = $cgi
+    } elsif $name == 'cli' {
+        $ini_file  = '/etc/php5/cli/php.ini'
+        $vars      = $cli
+    } else {
+        $ini_file = $ini
+        $vars     = $default
     }
 
-    $xdebug_remote_enable = $remote_enable ? {
-        ''      => '1',
-        default => $remote_enable,
-    }
-
-    $xdebug_remote_handler = $remote_handler ? {
-        ''      => 'dbgp',
-        default => $remote_handler,
-    }
-
-    $xdebug_remote_host = $remote_host ? {
-        ''      => 'localhost',
-        default => $remote_host,
-    }
-
-    $xdebug_remote_port = $remote_port ? {
-        ''      => '9000',
-        default => $remote_port,
-    }
-
-    $xdebug_remote_autostart = $remote_autostart ? {
-        ''      => '1',
-        default => $remote_autostart,
-    }
-
-    $xdebug_show_local_vars = $show_local_vars ? {
-        ''      => '1',
-        default => $show_local_vars,
-    }
-
-    $xdebug_var_display_max_data = $var_display_max_data ? {
-        ''      => '5000',
-        default => $var_display_max_data,
-    }
-
-    $xdebug_var_display_max_depth = $var_display_max_depth ? {
-        ''      => '10',
-        default => $var_display_max_depth,
-    }
-
-    $xdebug_show_exception_trace = $show_exception_trace ? {
-        ''      => '1',
-        default => $show_exception_trace,
-    }
-
-    file { "$xdebug_ini_file_path" :
-        content => template('xdebug/ini_file.erb'),
+    file_line { $ini_file :
         ensure  => present,
-        require => Package['xdebug'],
+        line    => template('xdebug/ini_file.erb'),
+        path    => $ini_file,
+        require => Package['xdebug']
+    }
+
+    if ! defined(File['/usr/bin/xdebug']) {
+        file { '/usr/bin/xdebug' :
+            ensure  => 'present',
+            mode    => '+X',
+            source  => 'puppet:///modules/xdebug/cli_alias.erb'
+        }
     }
 }

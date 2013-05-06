@@ -11,12 +11,12 @@ class { 'apt' :
 
 package { ['gcc', 'make', 'python-software-properties',
            'vim', 'curl', 'git', 'subversion'] :
-    ensure  => installed,
+    ensure  => 'installed',
     require => Exec['apt-get update'],
 }
 
 file { "/home/vagrant/.bash_aliases":
-    source => "${settings::confdir}/files/dot/.bash_aliases",
+    source => 'puppet:///modules/puphpet/dot/.bash_aliases',
     ensure  => present,
 }
 
@@ -98,51 +98,8 @@ class { 'xdebug' :
     notify  => Service['apache'],
 }
 
-file_line { 'xdebug-cgi':
-    line   => '
-[xdebug]
-xdebug.default_enable        = 1
-xdebug.remote_autostart      = 1
-xdebug.remote_connect_back   = 1
-xdebug.remote_enable         = 1
-xdebug.remote_handler        = dbgp
-xdebug.remote_mode           = req
-xdebug.remote_port           = 9000
-xdebug.show_exception_trace  = 0
-xdebug.show_local_vars       = 0
-xdebug.var_display_max_data  = 10000
-xdebug.var_display_max_depth = 20',
-    path    => '/etc/php5/apache2/php.ini',
-    require => Class['php'],
-    notify  => Service['apache'],
-}
-
-file_line { 'xdebug-cli':
-    line   => '
-[xdebug]
-xdebug.default_enable        = 1
-xdebug.remote_autostart      = 1
-xdebug.remote_connect_back   = 0
-xdebug.remote_enable         = 1
-xdebug.remote_handler        = dbgp
-xdebug.remote_mode           = req
-xdebug.remote_port           = 9000
-xdebug.show_exception_trace  = 0
-xdebug.show_local_vars       = 0
-xdebug.var_display_max_data  = 10000
-xdebug.var_display_max_depth = 20',
-    path    => '/etc/php5/cli/php.ini',
-    require => Class['php']
-}
-
-file { '/usr/bin/xdebug':
-    ensure  => 'present',
-    mode    => '+X',
-    content => '
-#!/bin/bash
-XDEBUG_CONFIG="idekey=xdebug" php -dxdebug.remote_host=`echo $SSH_CLIENT | cut -d "=" -f 2 | awk \'{print $1}\'` "$@"
-',
-}
+xdebug::config { 'cgi' : }
+xdebug::config { 'cli' : }
 
 class { 'mysql' :
     root_password => $mysql_root_password,
