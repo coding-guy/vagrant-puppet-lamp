@@ -140,7 +140,7 @@ file { '/usr/bin/xdebug':
     mode    => '+X',
     content => '
 #!/bin/bash
-XDEBUG_CONFIG="idekey=xdebug" php -dxdebug.remote_host=`echo $SSH_CLIENT | cut -d "=" -f 2 | awk \'{print $1}\'` $1
+XDEBUG_CONFIG="idekey=xdebug" php -dxdebug.remote_host=`echo $SSH_CLIENT | cut -d "=" -f 2 | awk \'{print $1}\'` "$@"
 ',
 }
 
