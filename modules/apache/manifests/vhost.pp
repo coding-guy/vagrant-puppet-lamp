@@ -55,6 +55,7 @@ define apache::vhost (
   $ssl            = false,
   $template       = 'apache/virtualhost/vhost.conf.erb',
   $priority       = '50',
+  $env_variables  = '',
   $enable         = true ) {
 
   $ensure = bool2ensure($enable)

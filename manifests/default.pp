@@ -19,12 +19,10 @@ package { ['gcc', 'make', 'python-software-properties',
 
 file { '/home/vagrant/.bash_aliases' :
     source => 'puppet:///modules/puphpet/dot/.bash_aliases',
-    ensure  => present
+    ensure => present
 }
 
 apt::ppa { 'ppa:ondrej/php5' : }
-
-apt::builddep { 'php5' : }
 
 class { 'git' :
     svn => true,
@@ -39,7 +37,7 @@ apache::module { 'rewrite' : }
 
 apache::vhost { 'invoise' :
     server_name   => 'invoise.dev',
-    serveraliases => ['www.invoise.dev'],
+    serveraliases => ['www.invoise.dev',],
     docroot       => '/var/www/invoi.se/web',
     port          => '80',
     priority      => '1'
@@ -47,7 +45,7 @@ apache::vhost { 'invoise' :
 
 apache::vhost { 'jtreminio' :
     server_name   => 'jtreminio.dev',
-    serveraliases => ['www.jtreminio.dev'],
+    serveraliases => ['www.jtreminio.dev',],
     docroot       => '/var/www/jtreminio.com/website',
     port          => '80',
     priority      => '1'
@@ -55,9 +53,10 @@ apache::vhost { 'jtreminio' :
 
 apache::vhost { 'puphpet' :
     server_name   => 'puphpet.dev',
-    serveraliases => ['www.puphpet.dev'],
+    serveraliases => ['www.puphpet.dev',],
     docroot       => '/var/www/puphpet/web',
     port          => '80',
+    env_variables => { 'APP_ENV' => 'dev' },
     priority      => '1'
 }
 
