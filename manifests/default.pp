@@ -19,7 +19,7 @@ package { ['gcc', 'make', 'python-software-properties',
 
 file { '/home/vagrant/.bash_aliases' :
     source => 'puppet:///modules/puphpet/dot/.bash_aliases',
-    ensure => present
+    ensure => 'present',
 }
 
 apt::ppa { 'ppa:ondrej/php5' : }
