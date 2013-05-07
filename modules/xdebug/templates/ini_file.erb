@@ -1,5 +1,5 @@
 [xdebug]
-<% if vars.is_a? Array -%>
+<% if vars.is_a? Hash -%>
 <% vars.each do |name,value| -%>
 xdebug.<%= name %> = <%= value %>
 <% end %>
