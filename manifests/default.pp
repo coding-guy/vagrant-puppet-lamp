@@ -2,7 +2,9 @@ $mysql_root_password = '123'
 
 exec { 'apt-get update' :
     command => 'apt-get update',
-    path    => '/usr/bin/'
+    path    => '/usr/bin/',
+    timeout => 60,
+    tries   => 3
 }
 
 class { 'apt' :
