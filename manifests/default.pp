@@ -88,15 +88,10 @@ php::ini { 'default' :
         'display_errors = On',
         'error_reporting = -1'
     ],
-    template => 'extra-ini.erb',
-    target   => 'error_reporting.ini',
-    require  => Class['php']
+    target   => 'error_reporting.ini'
 }
 
-class { 'xdebug' :
-    require => Package['php'],
-    notify  => Service['apache'],
-}
+class { 'xdebug' : }
 
 xdebug::config { 'cgi' : }
 xdebug::config { 'cli' : }
