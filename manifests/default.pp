@@ -33,6 +33,10 @@ class { 'apache' :
     require => Apt::Ppa['ppa:ondrej/php5'],
 }
 
+apache::dotconf { 'custom' :
+    content => 'EnableSendfile Off',
+}
+
 apache::module { 'rewrite' : }
 
 apache::vhost { 'invoise' :
