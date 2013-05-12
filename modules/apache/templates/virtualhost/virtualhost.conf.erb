@@ -12,9 +12,9 @@
 <% end -%>
 <% end -%>
 <% if env_variables != "" -%>
-    <% if env_variables.is_a? Hash -%>
-        <% env_variables.each do |name,value| -%>
-            SetEnv <%= name %> <%= value %>
+    <% if env_variables.is_a? Array -%>
+        <% env_variables.each do |envvars| -%>
+            SetEnv <%= envvars %>
         <% end -%>
     <% end -%>
 <% end -%>

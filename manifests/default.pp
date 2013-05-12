@@ -41,7 +41,7 @@ apache::module { 'rewrite' : }
 
 apache::vhost { 'invoise' :
     server_name   => 'invoise.dev',
-    serveraliases => ['www.invoise.dev',],
+    serveraliases => ['www.invoise.dev'],
     docroot       => '/var/www/invoi.se/web',
     port          => '80',
     priority      => '1'
@@ -49,7 +49,7 @@ apache::vhost { 'invoise' :
 
 apache::vhost { 'jtreminio' :
     server_name   => 'jtreminio.dev',
-    serveraliases => ['www.jtreminio.dev',],
+    serveraliases => ['www.jtreminio.dev'],
     docroot       => '/var/www/jtreminio.com/website',
     port          => '80',
     priority      => '1'
@@ -57,10 +57,10 @@ apache::vhost { 'jtreminio' :
 
 apache::vhost { 'puphpet' :
     server_name   => 'puphpet.dev',
-    serveraliases => ['www.puphpet.dev',],
+    serveraliases => ['www.puphpet.dev'],
     docroot       => '/var/www/puphpet/web',
     port          => '80',
-    env_variables => { 'APP_ENV' => 'dev' },
+    env_variables => ['APP_ENV dev'],
     priority      => '1'
 }
 
