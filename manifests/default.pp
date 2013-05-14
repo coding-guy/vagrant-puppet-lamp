@@ -1,5 +1,3 @@
-$mysql_root_password = '123'
-
 exec { 'apt-get update' :
     command => 'apt-get update',
     path    => '/usr/bin/',
@@ -11,8 +9,8 @@ class { 'apt' :
     always_apt_update => true
 }
 
-package { ['gcc', 'make', 'python-software-properties',
-           'vim', 'curl', 'git', 'subversion'] :
+package { ['build-essentials', 'python-software-properties',
+           'vim', 'curl', 'git', 'subversion', 'zip'] :
     ensure  => 'installed',
     require => Exec['apt-get update'],
 }

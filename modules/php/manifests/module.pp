@@ -1,9 +1,6 @@
 # = Define: php::module
 #
 # This define installs and configures php modules
-# On Debian and derivatives it install module named php5-${name}
-# On RedHat and derivatives it install module named php-${name}
-# If you need a custom prefix you can overload default $module_prefix parameter
 #
 # == Parameters
 #
@@ -18,7 +15,7 @@
 #   the module is applied. Default: true
 #
 # [*service_autorestart*]
-#   wathever we want a module installation notify a service to restart.
+#   whatever we want a module installation notify a service to restart.
 #
 # [*service*]
 #   Service to restart.
@@ -61,11 +58,9 @@ define php::module (
     false   => undef,
   }
 
-  $real_install_package = "${module_prefix}${name}"
-
   package { "PhpModule_${name}":
     ensure  => $real_version,
-    name    => $real_install_package,
+    name    => $name,
     notify  => $manage_service_autorestart,
     require => Package['php'],
   }
