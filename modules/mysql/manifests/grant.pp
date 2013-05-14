@@ -36,8 +36,8 @@ define mysql::grant (
 
   exec { "mysqlgrant-${mysql_user}-${mysql_host}-${mysql_db}":
     command     => $mysql::real_root_password ? {
-      ''      => "mysql -uroot < ${mysql_grant_filepath}/${mysql_grant_file}",
-      default => "mysql --defaults-file=/root/.my.cnf -uroot < ${mysql_grant_filepath}/${mysql_grant_file}",
+      ''      => "mysql -uroot SOURCE ${mysql_grant_filepath}/${mysql_grant_file}",
+      default => "mysql --defaults-file=/root/.my.cnf -uroot SOURCE ${mysql_grant_filepath}/${mysql_grant_file}",
     },
     require     => Service['mysql'],
     subscribe   => File[$mysql_grant_file],
