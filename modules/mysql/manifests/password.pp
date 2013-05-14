@@ -9,22 +9,28 @@ class mysql::password {
   require mysql
   require mysql::params
 
-  file { '/root/.my.cnf':
-    ensure  => 'present',
-    path    => '/root/.my.cnf',
-    mode    => '0644',
-    owner   => 'root',
-    group   => 'root',
-    content => template('mysql/root.my.cnf.erb'),
-    # replace => 'false',
-    # require => Exec['mysql_root_password'],
+  if (!defined(File['/home/vagrant/root-mysql'])) {
+    file { '/home/vagrant/root-mysql':
+      path   => '/home/vagrant/root-mysql',
+      ensure => directory
+    }
   }
 
-  file { '/root/.my.cnf.backup':
+  file { '/home/vagrant/root-mysql/.my.cnf':
     ensure  => 'present',
-    path    => '/root/.my.cnf.backup',
+    path    => '/home/vagrant/root-mysql/.my.cnf',
     mode    => '0644',
-    owner   => 'root',
+    owner   => 'vagrant',
+    group   => 'root',
+    content => template('mysql/root.my.cnf.erb'),
+    require => File['/home/vagrant/root-mysql']
+  }
+
+  file { '/home/vagrant/root-mysql/.my.cnf.backup':
+    ensure  => 'present',
+    path    => '/home/vagrant/root-mysql/.my.cnf.backup',
+    mode    => '0644',
+    owner   => 'vagrant',
     group   => 'root',
     content => template('mysql/root.my.cnf.backup.erb'),
     replace => 'false',
@@ -34,18 +40,18 @@ class mysql::password {
   exec { 'mysql_backup_root_my_cnf':
     require     => Service['mysql'],
     path        => "/bin:/sbin:/usr/bin:/usr/sbin",
-    unless      => 'diff /root/.my.cnf /root/.my.cnf.backup',
-    command     => 'cp /root/.my.cnf /root/.my.cnf.backup ; true',
-    before      => File['/root/.my.cnf'],
+    unless      => 'diff /home/vagrant/root-mysql/.my.cnf /home/vagrant/root-mysql/.my.cnf.backup',
+    command     => 'cp /home/vagrant/root-mysql/.my.cnf /home/vagrant/root-mysql/.my.cnf.backup ; true',
+    before      => File['/home/vagrant/root-mysql/.my.cnf'],
   }
 
 
   exec { 'mysql_root_password':
-    subscribe   => File['/root/.my.cnf'],
+    subscribe   => File['/home/vagrant/root-mysql/.my.cnf'],
     require     => Service['mysql'],
     path        => "/bin:/sbin:/usr/bin:/usr/sbin",
     refreshonly => true,
-    command     => "mysqladmin --defaults-file=/root/.my.cnf.backup -uroot password '${mysql::real_root_password}'",
+    command     => "mysqladmin --defaults-file=/home/vagrant/root-mysql/.my.cnf.backup -uroot password '${mysql::real_root_password}'",
   }
 
 }

@@ -13,8 +13,6 @@ define mysql::grant (
     file { $mysql_grant_filepath:
       path   => $mysql_grant_filepath,
       ensure => directory,
-      owner  => root,
-      group  => root,
       mode   => 0700,
     }
   }
@@ -27,17 +25,15 @@ define mysql::grant (
 
   file { $mysql_grant_file:
     ensure   => present,
-    mode     => 0600,
-    owner    => root,
-    group    => root,
+    mode     => 0644,
     path     => "${mysql_grant_filepath}/${mysql_grant_file}",
     content  => template('mysql/grant.erb'),
   }
 
   exec { "mysqlgrant-${mysql_user}-${mysql_host}-${mysql_db}":
     command     => $mysql::real_root_password ? {
-      ''      => "mysql -uroot SOURCE ${mysql_grant_filepath}/${mysql_grant_file}",
-      default => "mysql --defaults-file=/root/.my.cnf -uroot SOURCE ${mysql_grant_filepath}/${mysql_grant_file}",
+      ''      => "mysql -uroot < ${mysql_grant_filepath}/${mysql_grant_file}",
+      default => "mysql --defaults-file=/home/vagrant/root-mysql/.my.cnf -uroot < ${mysql_grant_filepath}/${mysql_grant_file}",
     },
     require     => Service['mysql'],
     subscribe   => File[$mysql_grant_file],
