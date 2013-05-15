@@ -30,12 +30,6 @@
 #   ensure => absent,
 # }
 #
-# This will install php-apc on debian instead of php5-apc
-#
-# php::module { 'apc':
-#   module_prefix => "php-",
-# }
-#
 # Note that you may include or declare the php class when using
 # the php::module define
 #
@@ -43,7 +37,6 @@ define php::module (
   $version             = $php::version,
   $service_autorestart = $php::bool_service_autorestart,
   $service             = $php::service,
-  $module_prefix       = $php::module_prefix,
   $absent              = $php::absent
   ) {
 
@@ -54,7 +47,7 @@ define php::module (
   }
 
   $manage_service_autorestart = $service_autorestart ? {
-    true    => "Service[$service]",
+    true    => "Service[${service}]",
     false   => undef,
   }
 

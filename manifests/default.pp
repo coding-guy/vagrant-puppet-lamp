@@ -9,7 +9,7 @@ class { 'apt' :
     always_apt_update => true
 }
 
-package { ['build-essentials', 'python-software-properties',
+package { ['build-essential', 'python-software-properties',
            'vim', 'curl', 'git', 'subversion', 'zip'] :
     ensure  => 'installed',
     require => Exec['apt-get update'],
@@ -67,11 +67,11 @@ class { 'php' :
     require => Package['apache'],
 }
 
-php::module { 'cli' : }
-php::module { 'curl' : }
-php::module { 'intl' : }
-php::module { 'mcrypt' : }
-php::module { 'mysql' : }
+php::module { 'php5-cli' : }
+php::module { 'php5-curl' : }
+php::module { 'php5-intl' : }
+php::module { 'php5-mcrypt' : }
+php::module { 'php5-mysql' : }
 
 class { 'php::pear' :
     require => Class['php'],
