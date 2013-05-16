@@ -10,7 +10,7 @@ class { 'apt' :
 }
 
 package { ['build-essential', 'python-software-properties',
-           'vim', 'curl', 'git', 'subversion', 'zip'] :
+           'vim', 'curl', 'zip'] :
     ensure  => 'installed',
     require => Exec['apt-get update'],
 }
@@ -22,9 +22,9 @@ file { '/home/vagrant/.bash_aliases' :
 
 apt::ppa { 'ppa:ondrej/php5' : }
 
-class { 'git' :
-    svn => true,
-    gui => false,
+git::repo { 'puphpet' :
+    path   => '/var/www/puphpet.dev/',
+    source => 'https://github.com/jtreminio/Puphpet.git'
 }
 
 class { 'apache' :
@@ -37,29 +37,13 @@ apache::dotconf { 'custom' :
 
 apache::module { 'rewrite' : }
 
-apache::vhost { 'invoise' :
-    server_name   => 'invoise.dev',
-    serveraliases => ['www.invoise.dev'],
-    docroot       => '/var/www/invoi.se/web',
-    port          => '80',
-    priority      => '1'
-}
-
-apache::vhost { 'jtreminio' :
-    server_name   => 'jtreminio.dev',
-    serveraliases => ['www.jtreminio.dev'],
-    docroot       => '/var/www/jtreminio.com/website',
-    port          => '80',
-    priority      => '1'
-}
-
 apache::vhost { 'puphpet' :
     server_name   => 'puphpet.dev',
     serveraliases => ['www.puphpet.dev'],
-    docroot       => '/var/www/puphpet/web',
+    docroot       => '/var/www/puphpet.dev/web',
     port          => '80',
-    env_variables => ['APP_ENV dev'],
-    priority      => '1'
+    priority      => '1',
+    require       => Git::Repo['puphpet']
 }
 
 class { 'php' :
@@ -81,8 +65,10 @@ class { 'php::devel' :
     require => Class['php'],
 }
 
-php::pecl::module { 'pecl_http' :
-    use_package => false
+class { 'php::composer' : }
+
+php::composer::run { 'puphpet' :
+    path => '/var/www/puphpet.dev/'
 }
 
 php::ini { 'default' :
@@ -99,6 +85,3 @@ class { 'xdebug' : }
 xdebug::config { 'cgi' : }
 xdebug::config { 'cli' : }
 
-class { 'mysql' :
-    root_password => $mysql_root_password,
-}
