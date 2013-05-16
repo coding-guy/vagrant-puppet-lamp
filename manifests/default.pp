@@ -86,12 +86,12 @@ php::pecl::module { 'pecl_http' :
 }
 
 php::ini { 'default' :
-    value    => [
+    value  => [
         'date.timezone = America/Chicago',
         'display_errors = On',
         'error_reporting = -1'
     ],
-    target   => 'error_reporting.ini'
+    target => 'error_reporting.ini'
 }
 
 class { 'xdebug' : }
