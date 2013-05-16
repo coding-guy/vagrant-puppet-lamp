@@ -172,7 +172,8 @@ class php (
   $log_dir             = params_lookup( 'log_dir' ),
   $log_file            = params_lookup( 'log_file' ),
   $port                = params_lookup( 'port' ),
-  $protocol            = params_lookup( 'protocol' )
+  $protocol            = params_lookup( 'protocol' ),
+  $mirror_confd        = false
   ) inherits php::params {
 
   $bool_service_autorestart=any2bool($service_autorestart)
@@ -183,6 +184,7 @@ class php (
   $bool_puppi=any2bool($puppi)
   $bool_debug=any2bool($debug)
   $bool_audit_only=any2bool($audit_only)
+  $bool_mirror_confd=any2bool($mirror_confd)
 
   ### Definition of some variables used in the module
   $manage_package = $php::bool_absent ? {
@@ -235,6 +237,22 @@ class php (
   package { 'php':
     ensure => $php::manage_package,
     name   => $php::package,
+  }
+
+  if ($bool_mirror_confd == false) {
+    exec { 'unlink-cli-conf.d' :
+      command => "rm -rf ${php::config_dir}/cli/conf.d && mkdir ${php::config_dir}/cli/conf.d && ln -s ${php::config_dir}/conf.d/*.ini ${php::config_dir}/cli/conf.d/",
+      path => ['/usr/bin' , '/bin'],
+      require => Package['php5'],
+      onlyif => "/usr/bin/test -L ${php::config_dir}/cli/conf.d",
+    }
+
+    exec { 'unlink-apache2-conf.d' :
+      command => "rm -rf ${php::config_dir}/apache2/conf.d && mkdir ${php::config_dir}/apache2/conf.d && ln -s ${php::config_dir}/conf.d/*.ini ${php::config_dir}/apache2/conf.d/",
+      path => ['/usr/bin' , '/bin'],
+      require => Package['php5'],
+      onlyif => "/usr/bin/test -L ${php::config_dir}/apache2/conf.d",
+    }
   }
 
   file { 'php.conf':
