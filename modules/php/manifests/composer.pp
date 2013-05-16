@@ -8,6 +8,6 @@ class php::composer (
     exec { "composer-${install_location}":
         command => "curl -sS https://getcomposer.org/installer | php -- --install-dir=/home/vagrant && mv /home/vagrant/composer.phar ${install_location}/${filename}",
         path    => ['/usr/bin' , '/bin'],
-        require => Package['php', 'curl'],
+        require => Package['php5', 'curl'],
     }
 }
