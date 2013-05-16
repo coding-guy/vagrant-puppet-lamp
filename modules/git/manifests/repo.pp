@@ -60,6 +60,7 @@ define git::repo(
     require => Package[$git::params::package],
     timeout => 600,
     onlyif => "/usr/bin/test ! -d ${path}/.git",
+    logoutput => "on_failure",
   }
 
   # I think tagging works, but it's possible setting a tag and a branch will just fight.
