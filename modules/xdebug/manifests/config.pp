@@ -1,5 +1,4 @@
 define xdebug::config (
-        $ini                   = '/etc/php5/apache2/php.ini',
         $default_enable        = 1,
         $remote_autostart      = 1,
         $remote_connect_back   = 1,
@@ -45,19 +44,19 @@ define xdebug::config (
     }
 
     $cli_temp = {
-        ini                 => '/etc/php5/cli/php.ini',
+        ini                 => "${php::params::config_dir}/cli/php.ini",
         remote_connect_back => 0
     }
     $cli = merge($cgi, $cli_temp)
 
     if $name == 'cgi' {
-        $ini_file = '/etc/php5/apache2/php.ini'
+        $ini_file = "${php::params::config_dir}/${service}/php.ini"
         $vars     = $cgi
     } elsif $name == 'cli' {
-        $ini_file = '/etc/php5/cli/php.ini'
+        $ini_file = "${php::params::config_dir}/cli/php.ini"
         $vars     = $cli
     } else {
-        $ini_file = $ini
+        $ini_file = "${php::params::config_dir}/${service}/php.ini"
         $vars     = $default
     }
 
