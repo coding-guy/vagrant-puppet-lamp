@@ -50,23 +50,32 @@ define xdebug::config (
     $cli = merge($cgi, $cli_temp)
 
     if $name == 'cgi' {
-        $ini_file = "${php::params::config_dir}/${service}/php.ini"
+        $ini_file = "${php::params::config_dir}/${php::params::service}/php.ini"
         $vars     = $cgi
     } elsif $name == 'cli' {
         $ini_file = "${php::params::config_dir}/cli/php.ini"
         $vars     = $cli
     } else {
-        $ini_file = "${php::params::config_dir}/${service}/php.ini"
+        $ini_file = "${php::params::config_dir}/${php::params::service}/php.ini"
         $vars     = $default
+    }
+
+    php::ini::removeBlock { "xdebug-${name}" :
+        blockName => 'xdebug',
+        iniFile   => $ini_file
     }
 
     file_line { $ini_file :
         ensure  => present,
         line    => template('xdebug/ini_file.erb'),
         path    => $ini_file,
-        require => Package['xdebug']
+        require => [
+            Package['xdebug'],
+            Php::Ini::RemoveBlock["xdebug-${name}"]
+        ]
     }
 
+    # shortcut for xdebug CLI debugging
     if ! defined(File['/usr/bin/xdebug']) {
         file { '/usr/bin/xdebug' :
             ensure => 'present',
