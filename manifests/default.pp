@@ -20,7 +20,9 @@ file { '/home/vagrant/.bash_aliases' :
     ensure => 'present',
 }
 
-apt::ppa { 'ppa:ondrej/php5' : }
+apt::ppa { 'ppa:ondrej/php5' :
+    before  => Class['php']
+}
 
 git::repo { 'puphpet' :
     path   => '/var/www/puphpet.dev/',
