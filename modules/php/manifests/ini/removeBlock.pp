@@ -8,5 +8,6 @@ define php::ini::removeBlock (
 
     exec { "${cmd} ${iniFile}" :
         path => '/usr/bin/',
+        require => Package['php']
     }
 }

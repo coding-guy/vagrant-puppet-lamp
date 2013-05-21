@@ -69,8 +69,9 @@ class { 'php::devel' :
 
 class { 'php::composer' : }
 
-php::composer::run { 'puphpet' :
-    path => '/var/www/puphpet.dev/'
+php::composer::run { 'puphpet':
+    path    => '/var/www/puphpet.dev/',
+    require => Git::Repo['puphpet']
 }
 
 php::ini { 'default' :
