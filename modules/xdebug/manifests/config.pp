@@ -61,8 +61,8 @@ define xdebug::config (
     }
 
     php::ini::removeblock { "xdebug-${name}" :
-        blockName => 'xdebug',
-        iniFile   => $ini_file
+        block_name => 'xdebug',
+        ini_file   => $ini_file
     }
 
     file_line { $ini_file :
