@@ -60,7 +60,7 @@ define xdebug::config (
         $vars     = $default
     }
 
-    php::ini::removeBlock { "xdebug-${name}" :
+    php::ini::removeblock { "xdebug-${name}" :
         blockName => 'xdebug',
         iniFile   => $ini_file
     }
@@ -71,7 +71,7 @@ define xdebug::config (
         path    => $ini_file,
         require => [
             Package['xdebug'],
-            Php::Ini::RemoveBlock["xdebug-${name}"]
+            Php::Ini::Removeblock["xdebug-${name}"]
         ]
     }
 
