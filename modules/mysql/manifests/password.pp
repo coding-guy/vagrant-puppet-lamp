@@ -11,47 +11,40 @@ class mysql::password {
 
   if (!defined(File['/home/vagrant/root-mysql'])) {
     file { '/home/vagrant/root-mysql':
-      path   => '/home/vagrant/root-mysql',
-      ensure => directory
+      ensure  => directory,
+      path    => '/home/vagrant/root-mysql',
+      group   => 'vagrant',
+      owner   => 'vagrant',
+      mode    => 0700,
+      require => Service['mysql'],
     }
   }
 
   file { '/home/vagrant/root-mysql/.my.cnf':
-    ensure  => 'present',
+    ensure  => present,
     path    => '/home/vagrant/root-mysql/.my.cnf',
-    mode    => '0644',
+    group   => 'vagrant',
     owner   => 'vagrant',
-    group   => 'root',
+    mode    => 0644,
     content => template('mysql/root.my.cnf.erb'),
     require => File['/home/vagrant/root-mysql']
   }
 
   file { '/home/vagrant/root-mysql/.my.cnf.backup':
-    ensure  => 'present',
+    ensure  => present,
     path    => '/home/vagrant/root-mysql/.my.cnf.backup',
-    mode    => '0644',
+    group   => 'vagrant',
     owner   => 'vagrant',
-    group   => 'root',
+    mode    => 0644,
     content => template('mysql/root.my.cnf.backup.erb'),
-    replace => 'false',
-    before  => [ Exec['mysql_root_password'] , Exec['mysql_backup_root_my_cnf'] ],
+    require => File['/home/vagrant/root-mysql/.my.cnf'],
   }
-
-  exec { 'mysql_backup_root_my_cnf':
-    require     => Service['mysql'],
-    path        => "/bin:/sbin:/usr/bin:/usr/sbin",
-    unless      => 'diff /home/vagrant/root-mysql/.my.cnf /home/vagrant/root-mysql/.my.cnf.backup',
-    command     => 'cp /home/vagrant/root-mysql/.my.cnf /home/vagrant/root-mysql/.my.cnf.backup ; true',
-    before      => File['/home/vagrant/root-mysql/.my.cnf'],
-  }
-
 
   exec { 'mysql_root_password':
     subscribe   => File['/home/vagrant/root-mysql/.my.cnf'],
-    require     => Service['mysql'],
     path        => "/bin:/sbin:/usr/bin:/usr/sbin",
     refreshonly => true,
     command     => "mysqladmin --defaults-file=/home/vagrant/root-mysql/.my.cnf.backup -uroot password '${mysql::real_root_password}'",
+    require     => File['/home/vagrant/root-mysql/.my.cnf.backup'],
   }
-
 }
