@@ -77,12 +77,19 @@ define php::pecl::module (
       }
 
       exec { "pecl-${name}":
-        command   => "/usr/bin/printf \"${auto_answer}\" | /usr/bin/pecl -d preferred_state=${preferred_state} install ${name}",
+        command   => "/usr/bin/printf \"${auto_answer}\" | /usr/bin/pecl -d preferred_state=${preferred_state} install -f ${name}",
         unless    => "/usr/bin/pecl info ${name}",
         logoutput => $pecl_real_logoutput,
         require   => [ Class['php::pear'], Class['php::devel']],
         #FIXME: Implement ensure => absent,
       }
+
+      php::ini { "pecl-${name}" :
+        value   => ["extension=${name}.so"],
+        target  => "pecl-${name}.ini",
+        require => Exec["pecl-${name}"]
+      }
+
       if $php::bool_augeas == true {
         php::augeas {
           "augeas-${name}":
