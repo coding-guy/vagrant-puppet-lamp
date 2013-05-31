@@ -9,7 +9,7 @@ class { 'apt' :
     always_apt_update => true
 }
 
-package { ['build-essential', 'python-software-properties',
+package { ['build-essential', 'python-software-properties', 'puppet-lint',
            'vim', 'curl', 'zip'] :
     ensure  => 'installed',
     require => Exec['apt-get update'],
