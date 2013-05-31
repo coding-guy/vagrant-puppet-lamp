@@ -94,7 +94,8 @@ php::pecl::module { 'xhprof':
 
 apache::vhost { 'xhprof':
   server_name => 'xhprof',
-  docroot     => '/var/www/xhprof',
+  docroot     => '/var/www/xhprof/xhprof_html',
   port        => 80,
   priority    => '1',
+  require     => Php::Pecl::Module['xhprof']
 }
