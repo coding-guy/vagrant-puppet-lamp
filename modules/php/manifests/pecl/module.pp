@@ -94,6 +94,7 @@ define php::pecl::module (
         command => "echo 'extension=${name}.so' >> ${php::params::config_dir}/conf.d/pecl-${name}.ini",
         path    => '/bin',
         require => Exec["pecl-${name}-ini"],
+        onlyif  => "/usr/bin/test -f /usr/lib/php5/20090626/${name}.so || /usr/bin/test -f /usr/lib/php5/20100525/${name}.so",
         notify  => $manage_service_autorestart
       }
 
