@@ -1,32 +1,30 @@
-define php::custom::xhprof ($output_dir = '/var/tmp/xhprof')
-{
+define php::custom::xhprof (
+  $output_dir = '/home/vagrant/xhprof'
+) {
     if !defined(File[$output_dir]) {
-        file { $output_dir :
-            ensure => 'directory',
-        }
+      file { $output_dir :
+        ensure => directory,
+        owner  => 'www-data'
+      }
     }
 
-    git::repo{ 'xhprof' :
-        path   => "${settings::confdir}/files/git/xhprof",
-        source => 'git://github.com/facebook/xhprof.git'
+    exec { 'xhprof-output-dir' :
+      command => "echo 'xhprof.output_dir=\"${output_dir}\"' >> ${php::params::config_dir}/pecl-xhprof.ini",
+      path    => '/bin',
+      require => Exec["pecl-xhprof"]
     }
 
-    build::install { 'xhprof' :
-        folder       => "${settings::confdir}/files/git/xhprof/extension",
-        buildoptions => "/usr/bin/phpize && ./configure",
-        require      => [
-            Git::Repo['xhprof'],
-            Apt::Builddep['php5']
-        ],
+    git::repo { 'xhprof' :
+      path   => '/var/www/xhprof',
+      source => 'https://github.com/facebook/xhprof.git'
     }
 
-    php::ini { 'xhprof' :
-        value    => [
-            '[xhprof]',
-            'extension=xhprof.so',
-            "xhprof.output_dir=\"${output_dir}\""
-        ],
-        template => 'extra-ini.erb',
-        target   => 'xhprof.ini',
+    exec { 'chown-xhprof-output' :
+      command => "chown www-data ${output_dir} -R",
+      path    => '/bin',
+      require => [
+        File[$output_dir],
+        Git::Repo['xhprof']
+      ]
     }
 }
