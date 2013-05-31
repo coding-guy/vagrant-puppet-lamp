@@ -84,11 +84,21 @@ define php::pecl::module (
       }
 
       exec { "pecl-${name}-ini" :
-        command => "printf '%s' 'extension=${name}.so' >> /etc/php5/conf.d/pecl-${name}.ini",
-        path    => '/usr/bin',
+        command => "echo '[${name}]' >> ${php::params::config_dir}/conf.d/pecl-${name}.ini",
+        path    => '/bin',
         require => Exec["pecl-${name}"],
         onlyif  => "/usr/bin/test -f /usr/lib/php5/20090626/${name}.so || /usr/bin/test -f /usr/lib/php5/20100525/${name}.so",
+      }
+
+      exec { "pecl-${name}-ini-so-include" :
+        command => "echo 'extension=${name}.so' >> ${php::params::config_dir}/conf.d/pecl-${name}.ini",
+        path    => '/bin',
+        require => Exec["pecl-${name}-ini"],
         notify  => $manage_service_autorestart
+      }
+
+      if $name == 'xhprof' {
+        php::custom::xhprof { 'xhprof' : }
       }
 
       if $php::bool_augeas == true {
