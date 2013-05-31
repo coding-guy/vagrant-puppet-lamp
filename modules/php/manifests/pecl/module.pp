@@ -84,18 +84,19 @@ define php::pecl::module (
       }
 
       exec { "pecl-${name}-ini" :
-        command => "echo '[${name}]' >> ${php::params::config_dir}/conf.d/pecl-${name}.ini",
-        path    => '/bin',
-        require => Exec["pecl-${name}"],
-        onlyif  => "/usr/bin/test -f /usr/lib/php5/20090626/${name}.so || /usr/bin/test -f /usr/lib/php5/20100525/${name}.so",
+        command     => "echo '[${name}]' >> ${php::params::config_dir}/conf.d/pecl-${name}.ini",
+        creates     => "${php::params::config_dir}/conf.d/pecl-${name}.ini",
+        path        => '/bin',
+        require     => Exec["pecl-${name}"],
+        onlyif      => "/usr/bin/test -f /usr/lib/php5/20090626/${name}.so || /usr/bin/test -f /usr/lib/php5/20100525/${name}.so",
       }
 
       exec { "pecl-${name}-ini-so-include" :
-        command => "echo 'extension=${name}.so' >> ${php::params::config_dir}/conf.d/pecl-${name}.ini",
-        path    => '/bin',
-        require => Exec["pecl-${name}-ini"],
-        onlyif  => "/usr/bin/test -f /usr/lib/php5/20090626/${name}.so || /usr/bin/test -f /usr/lib/php5/20100525/${name}.so",
-        notify  => $manage_service_autorestart
+        command     => "echo 'extension=${name}.so' >> ${php::params::config_dir}/conf.d/pecl-${name}.ini",
+        path        => '/bin',
+        require     => Exec["pecl-${name}-ini"],
+        onlyif      => "/usr/bin/test ! $(/bin/grep -c 'extension=${name}.so' ${php::params::config_dir}/conf.d/pecl-${name}.ini) -ne 0",
+        notify      => $manage_service_autorestart
       }
 
       if $name == 'xhprof' {

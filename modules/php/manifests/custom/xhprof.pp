@@ -8,12 +8,6 @@ define php::custom::xhprof (
       }
     }
 
-    exec { 'xhprof-output-dir' :
-      command => "echo 'xhprof.output_dir=\"${output_dir}\"' >> ${php::params::config_dir}/pecl-xhprof.ini",
-      path    => '/bin',
-      require => Exec["pecl-xhprof"]
-    }
-
     git::repo { 'xhprof' :
       path   => '/var/www/xhprof',
       source => 'https://github.com/facebook/xhprof.git'
@@ -25,6 +19,14 @@ define php::custom::xhprof (
       require => [
         File[$output_dir],
         Git::Repo['xhprof']
-      ]
+      ],
+      refreshonly => true
+    }
+
+    exec { 'add-xhprof-output-dir-to-ini' :
+      command     => "echo 'xhprof.output_dir=\"${output_dir}\"' >> ${php::params::config_dir}/conf.d/pecl-xhprof.ini",
+      path        => '/bin',
+      require     => Exec['pecl-xhprof-ini-so-include'],
+      onlyif      => "/usr/bin/test ! $(/bin/grep -c 'xhprof.output_dir=\"${output_dir}\"' ${php::params::config_dir}/conf.d/pecl-xhprof.ini) -ne 0"
     }
 }
