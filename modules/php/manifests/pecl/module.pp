@@ -81,13 +81,14 @@ define php::pecl::module (
         unless    => "/usr/bin/pecl info ${name}",
         logoutput => $pecl_real_logoutput,
         require   => [ Class['php::pear'], Class['php::devel']],
-        #FIXME: Implement ensure => absent,
       }
 
-      php::ini { "pecl-${name}" :
-        value   => ["extension=${name}.so"],
-        target  => "pecl-${name}.ini",
-        require => Exec["pecl-${name}"]
+      exec { "pecl-${name}-ini" :
+        command => "printf '%s' 'extension=${name}.so' >> /etc/php5/conf.d/pecl-${name}.ini",
+        path    => '/usr/bin',
+        require => Exec["pecl-${name}"],
+        onlyif  => "/usr/bin/test -f /usr/lib/php5/20090626/${name}.so || /usr/bin/test -f /usr/lib/php5/20100525/${name}.so",
+        notify  => $manage_service_autorestart
       }
 
       if $php::bool_augeas == true {
