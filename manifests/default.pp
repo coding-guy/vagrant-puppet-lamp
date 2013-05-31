@@ -87,3 +87,14 @@ class { 'xdebug' : }
 
 xdebug::config { 'cgi' : }
 xdebug::config { 'cli' : }
+
+php::pecl::module { 'xhprof':
+  use_package => false,
+}
+
+apache::vhost { 'xhprof':
+  server_name => 'xhprof',
+  docroot     => '/var/www/xhprof',
+  port        => 80,
+  priority    => '1',
+}
