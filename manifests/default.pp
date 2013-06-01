@@ -76,9 +76,9 @@ php::composer::run { 'puphpet':
 
 php::ini { 'default':
   value  => [
-      'date.timezone = America/Chicago',
-      'display_errors = On',
-      'error_reporting = -1'
+    'date.timezone = America/Chicago',
+    'display_errors = On',
+    'error_reporting = -1'
   ],
   target => 'error_reporting.ini'
 }
