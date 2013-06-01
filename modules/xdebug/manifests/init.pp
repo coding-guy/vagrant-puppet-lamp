@@ -1,5 +1,5 @@
 class xdebug (
-  $service = 'apache',
+  $service = 'apache'
 ){
   package { 'xdebug':
     name    => 'php5-xdebug',

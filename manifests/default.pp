@@ -1,45 +1,45 @@
-exec { 'apt-get update' :
+exec { 'apt-get update':
   command => 'apt-get update',
   path    => '/usr/bin/',
   timeout => 60,
   tries   => 3
 }
 
-class { 'apt' :
+class { 'apt':
   always_apt_update => true
 }
 
 package { ['build-essential', 'python-software-properties', 'puppet-lint',
-           'vim', 'curl', 'zip'] :
+           'vim', 'curl', 'zip']:
   ensure  => 'installed',
   require => Exec['apt-get update'],
 }
 
-file { '/home/vagrant/.bash_aliases' :
+file { '/home/vagrant/.bash_aliases':
   source => 'puppet:///modules/puphpet/dot/.bash_aliases',
   ensure => 'present',
 }
 
-apt::ppa { 'ppa:ondrej/php5' :
+apt::ppa { 'ppa:ondrej/php5':
   before  => Class['php']
 }
 
-git::repo { 'puphpet' :
+git::repo { 'puphpet':
   path   => '/var/www/puphpet.dev/',
   source => 'https://github.com/jtreminio/Puphpet.git'
 }
 
-class { 'apache' :
+class { 'apache':
   require => Apt::Ppa['ppa:ondrej/php5'],
 }
 
-apache::dotconf { 'custom' :
+apache::dotconf { 'custom':
   content => 'EnableSendfile Off',
 }
 
-apache::module { 'rewrite' : }
+apache::module { 'rewrite': }
 
-apache::vhost { 'puphpet' :
+apache::vhost { 'puphpet':
   server_name   => 'puphpet.dev',
   serveraliases => ['www.puphpet.dev'],
   docroot       => '/var/www/puphpet.dev/web',
@@ -48,33 +48,33 @@ apache::vhost { 'puphpet' :
   require       => Git::Repo['puphpet']
 }
 
-class { 'php' :
+class { 'php':
   service => 'apache',
   require => Package['apache'],
 }
 
-php::module { 'php5-cli' : }
-php::module { 'php5-curl' : }
-php::module { 'php5-intl' : }
-php::module { 'php5-mcrypt' : }
-php::module { 'php5-mysql' : }
+php::module { 'php5-cli': }
+php::module { 'php5-curl': }
+php::module { 'php5-intl': }
+php::module { 'php5-mcrypt': }
+php::module { 'php5-mysql': }
 
-class { 'php::pear' :
+class { 'php::pear':
   require => Class['php'],
 }
 
-class { 'php::devel' :
+class { 'php::devel':
   require => Class['php'],
 }
 
-class { 'php::composer' : }
+class { 'php::composer': }
 
 php::composer::run { 'puphpet':
   path    => '/var/www/puphpet.dev/',
   require => Git::Repo['puphpet']
 }
 
-php::ini { 'default' :
+php::ini { 'default':
   value  => [
       'date.timezone = America/Chicago',
       'display_errors = On',
@@ -83,10 +83,10 @@ php::ini { 'default' :
   target => 'error_reporting.ini'
 }
 
-class { 'xdebug' : }
+class { 'xdebug': }
 
-xdebug::config { 'cgi' : }
-xdebug::config { 'cli' : }
+xdebug::config { 'cgi': }
+xdebug::config { 'cli': }
 
 php::pecl::module { 'xhprof':
   use_package => false,
@@ -95,7 +95,7 @@ php::pecl::module { 'xhprof':
 apache::vhost { 'xhprof':
   server_name => 'xhprof',
   docroot     => '/var/www/xhprof/xhprof_html',
-  port        => 80,
+  port        => '80',
   priority    => '1',
   require     => Php::Pecl::Module['xhprof']
 }

@@ -80,27 +80,27 @@ define php::pecl::module (
         command   => "/usr/bin/printf \"${auto_answer}\" | /usr/bin/pecl -d preferred_state=${preferred_state} install -f ${name}",
         unless    => "/usr/bin/pecl info ${name}",
         logoutput => $pecl_real_logoutput,
-        require   => [ Class['php::pear'], Class['php::devel']],
+        require   => [ Class['php::pear'], Class['php::devel'] ],
       }
 
-      exec { "pecl-${name}-ini" :
-        command     => "echo '[${name}]' >> ${php::params::config_dir}/conf.d/pecl-${name}.ini",
-        creates     => "${php::params::config_dir}/conf.d/pecl-${name}.ini",
-        path        => '/bin',
-        require     => Exec["pecl-${name}"],
-        onlyif      => "/usr/bin/test -f /usr/lib/php5/20090626/${name}.so || /usr/bin/test -f /usr/lib/php5/20100525/${name}.so",
+      exec { "pecl-${name}-ini":
+        command => "echo '[${name}]' >> ${php::params::config_dir}/conf.d/pecl-${name}.ini",
+        creates => "${php::params::config_dir}/conf.d/pecl-${name}.ini",
+        path    => '/bin',
+        require => Exec["pecl-${name}"],
+        onlyif  => "/usr/bin/test -f /usr/lib/php5/20090626/${name}.so || /usr/bin/test -f /usr/lib/php5/20100525/${name}.so",
       }
 
-      exec { "pecl-${name}-ini-so-include" :
-        command     => "echo 'extension=${name}.so' >> ${php::params::config_dir}/conf.d/pecl-${name}.ini",
-        path        => '/bin',
-        require     => Exec["pecl-${name}-ini"],
-        onlyif      => "/usr/bin/test ! $(/bin/grep -c 'extension=${name}.so' ${php::params::config_dir}/conf.d/pecl-${name}.ini) -ne 0",
-        notify      => $manage_service_autorestart
+      exec { "pecl-${name}-ini-so-include":
+        command => "echo 'extension=${name}.so' >> ${php::params::config_dir}/conf.d/pecl-${name}.ini",
+        path    => '/bin',
+        require => Exec["pecl-${name}-ini"],
+        onlyif  => "/usr/bin/test ! $(/bin/grep -c 'extension=${name}.so' ${php::params::config_dir}/conf.d/pecl-${name}.ini) -ne 0",
+        notify  => $manage_service_autorestart
       }
 
       if $name == 'xhprof' {
-        php::custom::xhprof { 'xhprof' : }
+        php::custom::xhprof { 'xhprof': }
       }
 
       if $php::bool_augeas == true {
