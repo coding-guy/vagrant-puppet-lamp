@@ -13,13 +13,16 @@
         }
     ],
     "require": {
-        "puphpet/puppet-apache":  "dev-master",
-        "puphpet/puppetlabs-apt": "dev-master",
-        "puphpet/puppet-git":     "dev-master",
-        "puphpet/puppet-mysql":   "dev-master",
-        "puphpet/puppet-php":     "dev-master",
-        "puphpet/puppet-xdebug":  "dev-master",
-        "puphpet/puppet-puphpet": "dev-master"
+        "puphpet/puppet-apache":     "dev-master",
+        "puphpet/puppetlabs-apt":    "dev-master",
+        "puphpet/puppet-git":        "dev-master",
+        "puphpet/puppet-mysql":      "dev-master",
+        "puphpet/puppet-php":        "dev-master",
+        "puphpet/puppet-xdebug":     "dev-master",
+        "puphpet/puppet-puphpet":    "dev-master",
+        "puphpet/puppet-nginx":      "dev-master",
+        "puphpet/puppet-postgresql": "dev-master",
+        "puphpet/puppet-phpmyadmin": "dev-master"
     },
     "minimum-stability": "dev"
 }
