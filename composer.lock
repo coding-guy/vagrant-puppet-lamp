@@ -11,12 +11,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/puphpet/puphpet-module-installer.git",
-                "reference": "5773423a3275b63e212ba7bc103ac3eb8f9597af"
+                "reference": "4e5e7ddbee6df07077444eb4341538920594d94c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/puphpet/puphpet-module-installer/zipball/5773423a3275b63e212ba7bc103ac3eb8f9597af",
-                "reference": "5773423a3275b63e212ba7bc103ac3eb8f9597af",
+                "url": "https://api.github.com/repos/puphpet/puphpet-module-installer/zipball/4e5e7ddbee6df07077444eb4341538920594d94c",
+                "reference": "4e5e7ddbee6df07077444eb4341538920594d94c",
                 "shasum": ""
             },
             "type": "composer-installer",
@@ -36,11 +36,11 @@
                 {
                     "name": "Juan Treminio",
                     "email": "jtreminio@gmail.com",
-                    "homepage": "http://jtreminio.com"
+                    "homepage": "https://jtreminio.com"
                 }
             ],
             "description": "PuPHPet composer installer.",
-            "time": "2013-06-21 01:44:40"
+            "time": "2013-06-21 07:05:16"
         },
         {
             "name": "puphpet/puppet-apache",
@@ -304,12 +304,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/puphpet/puppetlabs-postgresql.git",
-                "reference": "8cb1acddb6ba80a8dd31ea34c48bd4851e51e841"
+                "reference": "106357f72529ffe573616c0afcd23bf13c61d36b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/puphpet/puppetlabs-postgresql/zipball/8cb1acddb6ba80a8dd31ea34c48bd4851e51e841",
-                "reference": "8cb1acddb6ba80a8dd31ea34c48bd4851e51e841",
+                "url": "https://api.github.com/repos/puphpet/puppetlabs-postgresql/zipball/106357f72529ffe573616c0afcd23bf13c61d36b",
+                "reference": "106357f72529ffe573616c0afcd23bf13c61d36b",
                 "shasum": ""
             },
             "require": {
@@ -327,17 +327,17 @@
                 },
                 {
                     "name": "PuPHPet",
-                    "homepage": "https://github.com/puphpet/puppet-postgresql"
+                    "homepage": "https://github.com/puphpet/puppetlabs-postgresql"
                 }
             ],
             "description": "Non-PHP! Composer-friendly version of Puppet Labs PostgreSQL module",
-            "homepage": "https://github.com/puphpet/puppet-postgresql",
+            "homepage": "https://github.com/puphpet/puppetlabs-postgresql",
             "keywords": [
                 "puppet",
                 "virtual machine",
                 "vm"
             ],
-            "time": "2013-06-21 05:22:41"
+            "time": "2013-06-21 06:52:39"
         },
         {
             "name": "puphpet/puppet-puphpet",
