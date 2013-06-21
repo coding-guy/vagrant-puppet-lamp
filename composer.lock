@@ -1,0 +1,321 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
+    ],
+    "hash": "540121c2704495ff9bf5548d9aa3283f",
+    "packages": [
+        {
+            "name": "puphpet/puphpet-module-installer",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/puphpet/puphpet-module-installer.git",
+                "reference": "5773423a3275b63e212ba7bc103ac3eb8f9597af"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/puphpet/puphpet-module-installer/zipball/5773423a3275b63e212ba7bc103ac3eb8f9597af",
+                "reference": "5773423a3275b63e212ba7bc103ac3eb8f9597af",
+                "shasum": ""
+            },
+            "type": "composer-installer",
+            "extra": {
+                "class": "Puphpet\\Composer\\ModuleInstaller"
+            },
+            "autoload": {
+                "psr-0": {
+                    "Puphpet\\Composer": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Juan Treminio",
+                    "email": "jtreminio@gmail.com",
+                    "homepage": "http://jtreminio.com"
+                }
+            ],
+            "description": "PuPHPet composer installer.",
+            "time": "2013-06-21 01:44:40"
+        },
+        {
+            "name": "puphpet/puppet-apache",
+            "version": "dev-master",
+            "target-dir": "apache",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/puphpet/puppet-apache.git",
+                "reference": "f851bbf972553293556ec45253ff915250c651b4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/puphpet/puppet-apache/zipball/f851bbf972553293556ec45253ff915250c651b4",
+                "reference": "f851bbf972553293556ec45253ff915250c651b4",
+                "shasum": ""
+            },
+            "require": {
+                "puphpet/puphpet-module-installer": "*",
+                "puphpet/puppi": "dev-master"
+            },
+            "type": "puphpet-module",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache 2."
+            ],
+            "authors": [
+                {
+                    "name": "Alessandro Franceschi / Lab42",
+                    "homepage": "https://github.com/example42/puppi"
+                },
+                {
+                    "name": "PuPHPet",
+                    "homepage": "https://github.com/puphpet/puppi"
+                }
+            ],
+            "description": "Non-PHP! Composer-friendly version of Lab42 Apache module",
+            "homepage": "https://github.com/puphpet/puppet-apache",
+            "keywords": [
+                "puppet",
+                "virtual machine",
+                "vm"
+            ],
+            "time": "2013-06-21 02:38:39"
+        },
+        {
+            "name": "puphpet/puppet-git",
+            "version": "dev-master",
+            "target-dir": "git",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/puphpet/puppet-git.git",
+                "reference": "a7e855f031ccd5363a0f481f462e31b80b7d6afd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/puphpet/puppet-git/zipball/a7e855f031ccd5363a0f481f462e31b80b7d6afd",
+                "reference": "a7e855f031ccd5363a0f481f462e31b80b7d6afd",
+                "shasum": ""
+            },
+            "require": {
+                "puphpet/puphpet-module-installer": "*",
+                "puphpet/puppetlabs-stdlib": "dev-master"
+            },
+            "type": "puphpet-module",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache 2."
+            ],
+            "authors": [
+                {
+                    "name": "Aaron Hicks",
+                    "homepage": "https://github.com/nesi/puppet-git"
+                },
+                {
+                    "name": "PuPHPet",
+                    "homepage": "https://github.com/puphpet/puppet-git"
+                }
+            ],
+            "description": "Non-PHP! Composer-friendly version of Aaron Hicks' Git module",
+            "homepage": "https://github.com/puphpet/puppet-git",
+            "keywords": [
+                "puppet",
+                "virtual machine",
+                "vm"
+            ],
+            "time": "2013-06-21 03:15:02"
+        },
+        {
+            "name": "puphpet/puppet-mysql",
+            "version": "dev-master",
+            "target-dir": "mysql",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/puphpet/puppet-mysql.git",
+                "reference": "6ca1733d9ccc8ae36d1bec2a6cf5e364bc7f4a39"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/puphpet/puppet-mysql/zipball/6ca1733d9ccc8ae36d1bec2a6cf5e364bc7f4a39",
+                "reference": "6ca1733d9ccc8ae36d1bec2a6cf5e364bc7f4a39",
+                "shasum": ""
+            },
+            "require": {
+                "puphpet/puphpet-module-installer": "*",
+                "puphpet/puppi": "dev-master"
+            },
+            "type": "puphpet-module",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache 2."
+            ],
+            "authors": [
+                {
+                    "name": "Alessandro Franceschi / Lab42",
+                    "homepage": "https://github.com/example42/puppet-mysql"
+                },
+                {
+                    "name": "PuPHPet",
+                    "homepage": "https://github.com/puphpet/puppet-mysql"
+                }
+            ],
+            "description": "Non-PHP! Composer-friendly version of Lab42 MySQL module",
+            "homepage": "https://github.com/puphpet/puppet-mysql",
+            "keywords": [
+                "puppet",
+                "virtual machine",
+                "vm"
+            ],
+            "time": "2013-06-21 03:19:32"
+        },
+        {
+            "name": "puphpet/puppetlabs-apt",
+            "version": "dev-master",
+            "target-dir": "apt",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/puphpet/puppetlabs-apt.git",
+                "reference": "1956465a18d13aac9f679f80f4ca33364c648189"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/puphpet/puppetlabs-apt/zipball/1956465a18d13aac9f679f80f4ca33364c648189",
+                "reference": "1956465a18d13aac9f679f80f4ca33364c648189",
+                "shasum": ""
+            },
+            "require": {
+                "puphpet/puphpet-module-installer": "*",
+                "puphpet/puppetlabs-stdlib": "dev-master"
+            },
+            "type": "puphpet-module",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache 2."
+            ],
+            "authors": [
+                {
+                    "name": "Puppet Labs",
+                    "homepage": "https://github.com/puppetlabs/puppetlabs-apt"
+                },
+                {
+                    "name": "PuPHPet",
+                    "homepage": "https://github.com/puphpet/puppetlabs-apt"
+                }
+            ],
+            "description": "Non-PHP! Composer-friendly version of Puppet Labs Apt module",
+            "homepage": "https://github.com/puphpet/puppetlabs-apt",
+            "keywords": [
+                "puppet",
+                "virtual machine",
+                "vm"
+            ],
+            "time": "2013-06-21 02:58:02"
+        },
+        {
+            "name": "puphpet/puppetlabs-stdlib",
+            "version": "dev-master",
+            "target-dir": "stdlib",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/puphpet/puppetlabs-stdlib.git",
+                "reference": "5f2297b1d4f8b98494fbc12fe38af07e1ba2966d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/puphpet/puppetlabs-stdlib/zipball/5f2297b1d4f8b98494fbc12fe38af07e1ba2966d",
+                "reference": "5f2297b1d4f8b98494fbc12fe38af07e1ba2966d",
+                "shasum": ""
+            },
+            "require": {
+                "puphpet/puphpet-module-installer": "*"
+            },
+            "type": "puphpet-module",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache 2."
+            ],
+            "authors": [
+                {
+                    "name": "Puppet Labs",
+                    "homepage": "https://github.com/puppetlabs/puppetlabs-stdlib"
+                },
+                {
+                    "name": "PuPHPet",
+                    "homepage": "https://github.com/puphpet/puppetlabs-stdlib"
+                }
+            ],
+            "description": "Non-PHP! Composer-friendly version of Puppet Labs Standard Library module",
+            "homepage": "https://github.com/puphpet/puppetlabs-stdlib",
+            "keywords": [
+                "puppet",
+                "virtual machine",
+                "vm"
+            ],
+            "time": "2013-06-21 03:00:02"
+        },
+        {
+            "name": "puphpet/puppi",
+            "version": "dev-master",
+            "target-dir": "puppi",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/puphpet/puppi.git",
+                "reference": "2b452ad05d04ebe4309e3803a944dfc1f853b6d9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/puphpet/puppi/zipball/2b452ad05d04ebe4309e3803a944dfc1f853b6d9",
+                "reference": "2b452ad05d04ebe4309e3803a944dfc1f853b6d9",
+                "shasum": ""
+            },
+            "require": {
+                "puphpet/puphpet-module-installer": "*"
+            },
+            "type": "puphpet-module",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache 2."
+            ],
+            "authors": [
+                {
+                    "name": "Alessandro Franceschi / Lab42",
+                    "homepage": "https://github.com/example42/puppi"
+                },
+                {
+                    "name": "PuPHPet",
+                    "homepage": "https://github.com/puphpet/puppi"
+                }
+            ],
+            "description": "Non-PHP! Composer-friendly version of Lab42 puppi module",
+            "homepage": "https://github.com/puphpet/puppi",
+            "keywords": [
+                "puppet",
+                "virtual machine",
+                "vm"
+            ],
+            "time": "2013-06-21 02:38:54"
+        }
+    ],
+    "packages-dev": [
+
+    ],
+    "aliases": [
+
+    ],
+    "minimum-stability": "dev",
+    "stability-flags": {
+        "puphpet/puppet-apache": 20,
+        "puphpet/puppetlabs-apt": 20,
+        "puphpet/puppet-git": 20,
+        "puphpet/puppet-mysql": 20
+    },
+    "platform": [
+
+    ],
+    "platform-dev": [
+
+    ]
+}
