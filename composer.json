@@ -12,9 +12,8 @@
             "homepage": "https://jtreminio.com"
         }
     ],
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.x-dev"
-        }
-    }
+    "require": {
+        "puphpet/puppet-apache": "dev-master"
+    },
+    "minimum-stability": "dev"
 }
