@@ -13,7 +13,8 @@
         }
     ],
     "require": {
-        "puphpet/puppet-apache": "dev-master"
+        "puphpet/puppet-apache":  "dev-master",
+        "puphpet/puppetlabs-apt": "dev-master"
     },
     "minimum-stability": "dev"
 }
