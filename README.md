@@ -6,19 +6,8 @@ This will create a basic VM for local development, without crapping up your dail
 This is the spiritual successor to my previous article,
 ["Setting Up a VM, Step by Step"](https://jtreminio.com/2012/07/setting-up-a-debian-vm-step-by-step).
 
-By default it sets up a copy of my [PuPHPet](http://puphpet.com) app.
-
-It uses Composer to retrieve all dependencies for you.
-
-Simply run
-
-    $ php composer.phar create-project puphpet/vagrant-puppet-lamp vagrant-puppet-lamp
-
-add an entry in your local hosts file, `192.168.123.101 puphpet.dev`
-
-and then `$ vagrant up`
-
-and within minutes you'll have a fully-functioning VM and website!
+By default it sets up a copy of my [PuPHPet](http://puphpet.com) app. Simply add an entry in local hosts,
+`192.168.123.101 puphpet.dev` and run `$ vagrant up` and within minutes you'll have a fully-functioning VM and website!
 
 PuPHPet
 ---------------
