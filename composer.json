@@ -18,8 +18,7 @@
         "puphpet/puppet-git":     "dev-master",
         "puphpet/puppet-mysql":   "dev-master",
         "puphpet/puppet-php":     "dev-master",
-        "puphpet/puppet-xdebug":  "dev-master",
-        "puphpet/puppet-puphpet": "dev-master"
+        "puphpet/puppet-xdebug":  "dev-master"
     },
     "minimum-stability": "dev"
 }
