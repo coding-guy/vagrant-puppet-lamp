@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "78ecef1554c09fe36e331da7650c4661",
+    "hash": "6ec1237b8efc3611eb0eda86904fee68",
     "packages": [
         {
             "name": "puphpet/puphpet-module-installer",
@@ -172,47 +172,6 @@
             "time": "2013-06-21 03:39:35"
         },
         {
-            "name": "puphpet/puppet-nginx",
-            "version": "dev-master",
-            "target-dir": "nginx",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/puphpet/puppet-nginx.git",
-                "reference": "ae390972314964bbb0a9f68894ca79e62aa2ecc3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/puphpet/puppet-nginx/zipball/ae390972314964bbb0a9f68894ca79e62aa2ecc3",
-                "reference": "ae390972314964bbb0a9f68894ca79e62aa2ecc3",
-                "shasum": ""
-            },
-            "require": {
-                "puphpet/puphpet-module-installer": "*"
-            },
-            "type": "puphpet-module",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache-2.0"
-            ],
-            "authors": [
-                {
-                    "name": "James Fryman",
-                    "homepage": "https://github.com/jfryman/puppet-nginx"
-                },
-                {
-                    "name": "PuPHPet",
-                    "homepage": "https://github.com/puphpet/puppet-nginx"
-                }
-            ],
-            "description": "Non-PHP! Puppet module for nginx installation",
-            "homepage": "https://github.com/puphpet/puppet-nginx",
-            "keywords": [
-                "nginx",
-                "puppet"
-            ],
-            "time": "2013-06-21 05:19:00"
-        },
-        {
             "name": "puphpet/puppet-php",
             "version": "dev-master",
             "target-dir": "php",
@@ -254,90 +213,6 @@
                 "vm"
             ],
             "time": "2013-06-21 03:47:20"
-        },
-        {
-            "name": "puphpet/puppet-phpmyadmin",
-            "version": "dev-master",
-            "target-dir": "phpmyadmin",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/puphpet/puppet-phpmyadmin.git",
-                "reference": "4bd3a2b1c7855fcf8670a749fcc9df832e3f8771"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/puphpet/puppet-phpmyadmin/zipball/4bd3a2b1c7855fcf8670a749fcc9df832e3f8771",
-                "reference": "4bd3a2b1c7855fcf8670a749fcc9df832e3f8771",
-                "shasum": ""
-            },
-            "require": {
-                "puphpet/puphpet-module-installer": "*"
-            },
-            "type": "puphpet-module",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache-2.0"
-            ],
-            "authors": [
-                {
-                    "name": "Frank Stelzer",
-                    "homepage": "https://github.com/frastel/puppet-phpmyadmin"
-                },
-                {
-                    "name": "PuPHPet",
-                    "homepage": "https://github.com/puphpet/puppet-phpmyadmin"
-                }
-            ],
-            "description": "Non-PHP! Composer-friendly version of Frank Stelzer PHPMyAdmin module",
-            "homepage": "https://github.com/puphpet/puppet-phpmyadmin",
-            "keywords": [
-                "puppet",
-                "virtual machine",
-                "vm"
-            ],
-            "time": "2013-06-21 05:27:09"
-        },
-        {
-            "name": "puphpet/puppet-postgresql",
-            "version": "dev-master",
-            "target-dir": "postgresql",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/puphpet/puppetlabs-postgresql.git",
-                "reference": "8cb1acddb6ba80a8dd31ea34c48bd4851e51e841"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/puphpet/puppetlabs-postgresql/zipball/8cb1acddb6ba80a8dd31ea34c48bd4851e51e841",
-                "reference": "8cb1acddb6ba80a8dd31ea34c48bd4851e51e841",
-                "shasum": ""
-            },
-            "require": {
-                "puphpet/puphpet-module-installer": "*"
-            },
-            "type": "puphpet-module",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache-2.0"
-            ],
-            "authors": [
-                {
-                    "name": "Puppet Labs",
-                    "homepage": "https://github.com/puppetlabs/puppetlabs-postgresql"
-                },
-                {
-                    "name": "PuPHPet",
-                    "homepage": "https://github.com/puphpet/puppet-postgresql"
-                }
-            ],
-            "description": "Non-PHP! Composer-friendly version of Puppet Labs PostgreSQL module",
-            "homepage": "https://github.com/puphpet/puppet-postgresql",
-            "keywords": [
-                "puppet",
-                "virtual machine",
-                "vm"
-            ],
-            "time": "2013-06-21 05:22:41"
         },
         {
             "name": "puphpet/puppet-puphpet",
@@ -558,10 +433,7 @@
         "puphpet/puppet-mysql": 20,
         "puphpet/puppet-php": 20,
         "puphpet/puppet-xdebug": 20,
-        "puphpet/puppet-puphpet": 20,
-        "puphpet/puppet-nginx": 20,
-        "puphpet/puppet-postgresql": 20,
-        "puphpet/puppet-phpmyadmin": 20
+        "puphpet/puppet-puphpet": 20
     },
     "platform": [
 
