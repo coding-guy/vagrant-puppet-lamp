@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "6ec1237b8efc3611eb0eda86904fee68",
+    "hash": "540121c2704495ff9bf5548d9aa3283f",
     "packages": [
         {
             "name": "puphpet/puphpet-module-installer",
@@ -135,12 +135,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/puphpet/puppet-mysql.git",
-                "reference": "cd05e5c9c4cd456a884fe785633bcac87a0cb4b9"
+                "reference": "6ca1733d9ccc8ae36d1bec2a6cf5e364bc7f4a39"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/puphpet/puppet-mysql/zipball/cd05e5c9c4cd456a884fe785633bcac87a0cb4b9",
-                "reference": "cd05e5c9c4cd456a884fe785633bcac87a0cb4b9",
+                "url": "https://api.github.com/repos/puphpet/puppet-mysql/zipball/6ca1733d9ccc8ae36d1bec2a6cf5e364bc7f4a39",
+                "reference": "6ca1733d9ccc8ae36d1bec2a6cf5e364bc7f4a39",
                 "shasum": ""
             },
             "require": {
@@ -169,127 +169,7 @@
                 "virtual machine",
                 "vm"
             ],
-            "time": "2013-06-21 03:39:35"
-        },
-        {
-            "name": "puphpet/puppet-php",
-            "version": "dev-master",
-            "target-dir": "php",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/puphpet/puppet-php.git",
-                "reference": "575da71831fa6392c3fb00069d206ade1181575d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/puphpet/puppet-php/zipball/575da71831fa6392c3fb00069d206ade1181575d",
-                "reference": "575da71831fa6392c3fb00069d206ade1181575d",
-                "shasum": ""
-            },
-            "require": {
-                "puphpet/puphpet-module-installer": "*",
-                "puphpet/puppi": "dev-master"
-            },
-            "type": "puphpet-module",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache 2."
-            ],
-            "authors": [
-                {
-                    "name": "Romain THERRAT",
-                    "homepage": "https://github.com/lermit/puppet-php"
-                },
-                {
-                    "name": "PuPHPet",
-                    "homepage": "https://github.com/puphpet/puppet-php"
-                }
-            ],
-            "description": "Non-PHP! Composer-friendly version of Romain THERRAT PHP module",
-            "homepage": "https://github.com/puphpet/puppet-php",
-            "keywords": [
-                "puppet",
-                "virtual machine",
-                "vm"
-            ],
-            "time": "2013-06-21 03:47:20"
-        },
-        {
-            "name": "puphpet/puppet-puphpet",
-            "version": "dev-master",
-            "target-dir": "puphpet",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/puphpet/puppet-puphpet.git",
-                "reference": "431b297c43edc55567c739a485cdebd8bb88560f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/puphpet/puppet-puphpet/zipball/431b297c43edc55567c739a485cdebd8bb88560f",
-                "reference": "431b297c43edc55567c739a485cdebd8bb88560f",
-                "shasum": ""
-            },
-            "require": {
-                "puphpet/puphpet-module-installer": "*"
-            },
-            "type": "puphpet-module",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "PuPHPet",
-                    "homepage": "https://github.com/puphpet/puppet-puphpet"
-                }
-            ],
-            "description": "Non-PHP! PuPHPet-specific things.",
-            "homepage": "https://github.com/puphpet/puppet-puphpet",
-            "keywords": [
-                "puppet",
-                "virtual machine",
-                "vm"
-            ],
-            "time": "2013-06-21 04:16:34"
-        },
-        {
-            "name": "puphpet/puppet-xdebug",
-            "version": "dev-master",
-            "target-dir": "xdebug",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/puphpet/puppet-xdebug.git",
-                "reference": "e8313f978bb2d35764d90e65317b4c61484eac53"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/puphpet/puppet-xdebug/zipball/e8313f978bb2d35764d90e65317b4c61484eac53",
-                "reference": "e8313f978bb2d35764d90e65317b4c61484eac53",
-                "shasum": ""
-            },
-            "require": {
-                "puphpet/puphpet-module-installer": "*"
-            },
-            "type": "puphpet-module",
-            "notification-url": "https://packagist.org/downloads/",
-            "authors": [
-                {
-                    "name": "ridonkulous",
-                    "homepage": "https://github.com/ridonkulous/puppet-xdebug"
-                },
-                {
-                    "name": "PuPHPet",
-                    "homepage": "https://github.com/puphpet/puppet-xdebug"
-                }
-            ],
-            "description": "Non-PHP! Composer-friendly version of ridonkulous Xdebug module",
-            "homepage": "https://github.com/puphpet/puppet-xdebug",
-            "keywords": [
-                "puppet",
-                "virtual machine",
-                "vm"
-            ],
-            "time": "2013-06-21 03:54:24"
+            "time": "2013-06-21 03:19:32"
         },
         {
             "name": "puphpet/puppetlabs-apt",
@@ -430,10 +310,7 @@
         "puphpet/puppet-apache": 20,
         "puphpet/puppetlabs-apt": 20,
         "puphpet/puppet-git": 20,
-        "puphpet/puppet-mysql": 20,
-        "puphpet/puppet-php": 20,
-        "puphpet/puppet-xdebug": 20,
-        "puphpet/puppet-puphpet": 20
+        "puphpet/puppet-mysql": 20
     },
     "platform": [
 
