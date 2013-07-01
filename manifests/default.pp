@@ -9,15 +9,22 @@ class { 'apt':
   always_apt_update => true
 }
 
-package { ['build-essential', 'python-software-properties', 'puppet-lint',
-           'vim', 'curl', 'zip']:
+package {
+  [
+    'build-essential',
+    'python-software-properties',
+    'puppet-lint',
+    'vim',
+    'curl',
+    'zip'
+  ]:
   ensure  => 'installed',
   require => Exec['apt-get update'],
 }
 
 file { '/home/vagrant/.bash_aliases':
-  source => 'puppet:///modules/puphpet/dot/.bash_aliases',
   ensure => 'present',
+  source => 'puppet:///modules/puphpet/dot/.bash_aliases',
 }
 
 apt::ppa { 'ppa:ondrej/php5':
@@ -67,7 +74,9 @@ class { 'php::devel':
   require => Class['php'],
 }
 
-class { 'php::composer': }
+class { 'php::composer':
+  require => Package['php5', 'curl'],
+}
 
 php::composer::run { 'puphpet':
   path    => '/var/www/puphpet.dev/',
