@@ -1,3 +1,8 @@
+Abandoned
+==================
+
+This repo has been abandoned and will no longer receive updates. Create your own VM using www.puphpet.com
+
 Vagrant/Puppet LAMP
 ==================
 
